@@ -3,26 +3,36 @@ class Person
 
   def initialize(name, age)
     @name = name
+    if !@name.blank?
+      @nickname = name[0..3]
+    end
     @age = age
   end
 
   def nickname
     # YOUR IMPLEMENTATION HERE
-    'nickname'
+    return @nickname
   end
 
   def birth_year
     # YOUR IMPLEMENTATION HERE
-    1990
+    return Time.now.year-@age.to_i
   end
 
   def introduction
     # YOUR IMPLEMENTATION HERE
-    'introduce'
+    return "Hello, I am #{@name} and am #{@age}."
   end
 
   def fib_number
     # YOUR IMPLMENTATION HERE
-    0
+    def fibonacci(n)
+      if n <= 1
+        return n
+      else
+        return fibonacci(n-1) + fibonacci(n-2)
+      end
+    end
+    return fibonacci(@age.to_i)
   end
 end
