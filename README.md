@@ -42,7 +42,7 @@ Also, you'll see a lot of `<%= some_variable %>`. This is embedded ruby, which w
 ## Alright, lets get crackin':
 
 ### Question 1
-Here, we're going to look into a post request.
+Here, we're going to look into a POST request.
 
 If you look closely at the code at home.html.erb, you'll see a bunch of confusing code like this:
 
@@ -86,18 +86,20 @@ Uncomment the code in `pages_controller.rb` and validate your changes.
 
 Now we're going to look at more routing + creating classes!
 
-If you look at the Question 3 section on the home page, you'll see that we have another form! However, if you submit it you'll get an error message telling you that no route matches the request. Fix the bug.
+If you look at the Question 3 section on the home page, you'll see that we have another form! However, if you submit it you'll get an error message telling you that no route matches the request.
 
-As well, change `routes.rb` such that a request to the `/age` route is directed to the `person` method in `pages_controller.rb`, rather than the `age` method.
+Let's fix this bug.
 
-In `/controllers/concerns`, implement a `Person` class whose `initialize` method accepts a name and age and creates an instance variable `@nickname` that is the first four letters of `@name`.
+Step 1: `<%= form_tag age_path, method: :put do %>` tells Rails to create a `PUT` request to `/age` on form submission. Create an appropriate route in `routes.rb` to handle the form submission; direct it to the `person` method in `pages_controller.rb`, rather than the `age` method. This means that a GET request to `/age` will be handled by a different action than a PUT request to `/age`!
+
+Step 2: in `/controllers/concerns`, implement a `Person` class whose `initialize` method accepts a name and age and creates an instance variable `@nickname` that is the first four letters of `@name`.
 The `Person` class should have the following methods:
 - `introduce`: returns a string with the instance's name and age
 - `birth_year`: calculates what year they were born given an age in years
 - `nickname`: returns the nickname
 - `fib_number`: returns the `@age`-th fib number (ex: if I am 21, return the 21th fib number).
 
-Go to `localhost:3000/age` and validate you did this correctly.
+Submit the Question 3 form (which will direct you to `localhost:3000/age`) and validate you did this correctly.
 
 Note: don't worry about blank form edge cases (which we practiced handling before) and formatting.
 
